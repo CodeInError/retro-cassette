@@ -1,5 +1,5 @@
 cat > .github/workflows/deploy.yml <<'EOF'
-name: Deploy Retro Cassette
+name: Deploy React App to GitHub Pages
 
 "on":
   push:
@@ -12,12 +12,8 @@ permissions:
   pages: write
   id-token: write
 
-concurrency:
-  group: pages
-  cancel-in-progress: true
-
 jobs:
-  build:
+  deploy:
     runs-on: ubuntu-latest
 
     steps:
@@ -27,13 +23,13 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
-          node-version: 22
+          node-version: 20
           cache: npm
 
       - name: Install dependencies
         run: npm ci
 
-      - name: Build
+      - name: Build React app
         run: npm run build
 
       - name: Setup Pages
@@ -44,6 +40,7 @@ jobs:
         with:
           path: ./dist
 
-      - name: Deploy
+      - name: Deploy to GitHub Pages
+        id: deployment
         uses: actions/deploy-pages@v4
 EOF
