@@ -1187,7 +1187,7 @@ body {
 
   font-family: Georgia, serif;
 
-  font-size: clamp(32px, 3vw, 50px);
+  font-size: clamp(10px, 2vw, 20px);
 
   line-height: 1.05;
 
@@ -2180,4 +2180,30 @@ body {
 .progress-dot {
   cursor: pointer;
   z-index: 10;
+}
+
+.song-title {
+  margin: 0;
+
+  font-family: Georgia, serif;
+
+  font-size: clamp(32px, 3vw, 50px);
+
+  line-height: 1.05;
+
+  color: #eadbc4;
+
+  /* Keep title on one line */
+  white-space: nowrap;
+
+  /* Don't allow it to overflow */
+  overflow: hidden;
+
+  /* Show ... */
+  text-overflow: ellipsis;
+
+  /* Required so ellipsis works inside grid */
+  max-width: 100%;
+
+  cursor: default;
 }

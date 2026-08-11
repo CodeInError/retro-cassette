@@ -19,7 +19,7 @@ import "./App.css";
 // ============================================================
 
 const YOUTUBE_PLAYLIST_ID =
-  "PL3JSEdjy0dsJJzd2tmKShEh57MHE85DaO";
+  "PLeatb7hupNV_AWUl_7ttbsKeCQh8tF5N4";
 
 
 function App() {
@@ -1006,7 +1006,10 @@ useEffect(() => {
           </div>
 
 
-          <h2>
+          <h2
+            className="song-title"
+            title={currentSong.title}
+          >
             {currentSong.title}
           </h2>
 
