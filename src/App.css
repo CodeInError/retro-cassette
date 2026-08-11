@@ -1,184 +1,2183 @@
-.counter {
-  font-size: 16px;
-  padding: 5px 10px;
-  border-radius: 5px;
-  color: var(--accent);
-  background: var(--accent-bg);
-  border: 2px solid transparent;
-  transition: border-color 0.3s;
-  margin-bottom: 24px;
+/* =========================================
+   GLOBAL
+========================================= */
 
-  &:hover {
-    border-color: var(--accent-border);
-  }
-  &:focus-visible {
-    outline: 2px solid var(--accent);
-    outline-offset: 2px;
-  }
+* {
+  box-sizing: border-box;
 }
 
-.hero {
+html,
+body,
+#root {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  overflow: hidden;
+}
+
+.retro-app {
+  width: 100%;
+  height: 100dvh;
+  min-height: 600px;
+
   position: relative;
 
-  .base,
-  .framework,
-  .vite {
-    inset-inline: 0;
-    margin: 0 auto;
-  }
+  overflow: hidden;
 
-  .base {
-    width: 170px;
-    position: relative;
-    z-index: 0;
-  }
-
-  .framework,
-  .vite {
-    position: absolute;
-  }
-
-  .framework {
-    z-index: 1;
-    top: 34px;
-    height: 28px;
-    transform: perspective(2000px) rotateZ(300deg) rotateX(44deg) rotateY(39deg)
-      scale(1.4);
-  }
-
-  .vite {
-    z-index: 0;
-    top: 107px;
-    height: 26px;
-    width: auto;
-    transform: perspective(2000px) rotateZ(300deg) rotateX(40deg) rotateY(39deg)
-      scale(0.8);
-  }
-}
-
-#center {
   display: flex;
   flex-direction: column;
-  gap: 25px;
-  place-content: center;
-  place-items: center;
-  flex-grow: 1;
 
-  @media (max-width: 1024px) {
-    padding: 32px 20px 24px;
-    gap: 18px;
-  }
+  color: #eadbc4;
+
+  background:
+    radial-gradient(
+      circle at 70% 45%,
+      rgba(91, 22, 36, 0.65),
+      transparent 32%
+    ),
+    radial-gradient(
+      circle at 35% 80%,
+      rgba(26, 24, 55, 0.7),
+      transparent 40%
+    ),
+    linear-gradient(
+      135deg,
+      #030914 0%,
+      #07101e 45%,
+      #170b16 100%
+    );
 }
 
-#next-steps {
+
+/* =========================================
+   GRAIN
+========================================= */
+
+.grain {
+  position: absolute;
+
+  inset: 0;
+
+  z-index: 20;
+
+  pointer-events: none;
+
+  opacity: 0.08;
+
+  background-image:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+}
+
+
+/* =========================================
+   RED LIGHT
+========================================= */
+
+.red-glow {
+  position: absolute;
+
+  width: 600px;
+  height: 600px;
+
+  right: 8%;
+  top: 10%;
+
+  border-radius: 50%;
+
+  background: rgba(159, 26, 43, 0.2);
+
+  filter: blur(120px);
+
+  pointer-events: none;
+}
+
+
+/* =========================================
+   HEADER
+========================================= */
+
+.top-bar {
+  height: 64px;
+  min-height: 64px;
+
+  padding: 0 3%;
+
   display: flex;
-  border-top: 1px solid var(--border);
-  text-align: left;
+  align-items: center;
+  justify-content: space-between;
 
-  & > div {
-    flex: 1 1 0;
-    padding: 32px;
-    @media (max-width: 1024px) {
-      padding: 24px 20px;
-    }
-  }
-
-  .icon {
-    margin-bottom: 16px;
-    width: 22px;
-    height: 22px;
-  }
-
-  @media (max-width: 1024px) {
-    flex-direction: column;
-    text-align: center;
-  }
-}
-
-#docs {
-  border-right: 1px solid var(--border);
-
-  @media (max-width: 1024px) {
-    border-right: none;
-    border-bottom: 1px solid var(--border);
-  }
-}
-
-#next-steps ul {
-  list-style: none;
-  padding: 0;
-  display: flex;
-  gap: 8px;
-  margin: 32px 0 0;
-
-  .logo {
-    height: 18px;
-  }
-
-  a {
-    color: var(--text-h);
-    font-size: 16px;
-    border-radius: 6px;
-    background: var(--social-bg);
-    display: flex;
-    padding: 6px 12px;
-    align-items: center;
-    gap: 8px;
-    text-decoration: none;
-    transition: box-shadow 0.3s;
-
-    &:hover {
-      box-shadow: var(--shadow);
-    }
-    .button-icon {
-      height: 18px;
-      width: 18px;
-    }
-  }
-
-  @media (max-width: 1024px) {
-    margin-top: 20px;
-    flex-wrap: wrap;
-    justify-content: center;
-
-    li {
-      flex: 1 1 calc(50% - 8px);
-    }
-
-    a {
-      width: 100%;
-      justify-content: center;
-      box-sizing: border-box;
-    }
-  }
-}
-
-#spacer {
-  height: 88px;
-  border-top: 1px solid var(--border);
-  @media (max-width: 1024px) {
-    height: 48px;
-  }
-}
-
-.ticks {
   position: relative;
+  z-index: 10;
+}
+
+.time {
+  font-family: monospace;
+
+  font-size: 14px;
+
+  color: #e4d7c3;
+}
+
+.playlist-status {
+  display: flex;
+
+  align-items: center;
+
+  gap: 10px;
+
+  font-size: 15px;
+
+  color: #c8c0b4;
+}
+
+.live-dot {
+  width: 13px;
+  height: 13px;
+
+  border-radius: 50%;
+
+  background: #ed3147;
+
+  box-shadow:
+    0 0 10px #ed3147,
+    0 0 25px rgba(237, 49, 71, 0.5);
+}
+
+.more-button {
+  width: 48px;
+  height: 48px;
+
+  border-radius: 50%;
+
+  border: 1px solid rgba(232, 219, 196, 0.35);
+
+  background: transparent;
+
+  color: #eadbc4;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  cursor: pointer;
+}
+
+
+/* =========================================
+   MAIN
+========================================= */
+
+.main-content {
+  flex: 1;
+
+  min-height: 0;
+
   width: 100%;
 
-  &::before,
-  &::after {
-    content: '';
-    position: absolute;
-    top: -4.5px;
-    border: 5px solid transparent;
+  padding: 15px 4%;
+
+  display: grid;
+
+  grid-template-columns:
+    minmax(230px, 0.8fr)
+    minmax(420px, 1.5fr)
+    minmax(230px, 0.8fr);
+
+  align-items: center;
+
+  gap: 25px;
+
+  position: relative;
+
+  z-index: 2;
+
+  overflow: hidden;
+}
+
+
+/* =========================================
+   BRAND
+========================================= */
+
+.branding {
+  padding-left: 4%;
+
+  position: relative;
+}
+
+.est {
+  display: flex;
+
+  align-items: center;
+
+  gap: 12px;
+
+  color: #d52c40;
+
+  font-family: monospace;
+
+  font-size: 12px;
+
+  letter-spacing: 4px;
+
+  margin-bottom: 20px;
+}
+
+.est span {
+  width: 45px;
+
+  height: 2px;
+
+  background: #d52c40;
+}
+
+.branding h1 {
+  margin: 0;
+
+  font-family: Georgia, "Times New Roman", serif;
+
+  font-size: clamp(42px, 4.2vw, 68px);
+
+  line-height: 0.82;
+
+  letter-spacing: -3px;
+
+  color: #eadbc4;
+
+  text-shadow:
+    0 4px 15px rgba(0, 0, 0, 0.4);
+}
+
+
+/* mini cassette */
+
+.mini-cassette-icon {
+  width: 76px;
+  height: 38px;
+
+  margin-top: 35px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  color: #d92d43;
+}
+
+.mini-cassette-icon > span {
+  width: 40px;
+
+  height: 2px;
+
+  background: #d92d43;
+}
+
+.mini-reels {
+  width: 55px;
+  height: 32px;
+
+  position: absolute;
+
+  left: 80px;
+
+  border: 2px solid #d92d43;
+
+  border-radius: 4px;
+}
+
+.mini-reels i {
+  position: absolute;
+
+  top: 9px;
+
+  width: 9px;
+  height: 9px;
+
+  border: 2px solid #d92d43;
+
+  border-radius: 50%;
+}
+
+.mini-reels i:first-child {
+  left: 9px;
+}
+
+.mini-reels i:last-child {
+  right: 9px;
+}
+
+.brand-tagline {
+  margin-top: 20px;
+
+  font-size: 11px;
+
+  letter-spacing: 5px;
+
+  color: #d9cdb9;
+}
+
+.brand-tagline b {
+  color: #d82e42;
+
+  padding: 0 6px;
+}
+
+
+/* =========================================
+   CASSETTE
+========================================= */
+
+.cassette-area {
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  perspective: 1200px;
+}
+
+.old-cassette {
+  width: min(
+    690px,
+    46vw,
+    calc((100dvh - 280px) * 1.55)
+  );
+
+  aspect-ratio: 1.55 / 1;
+
+  max-height: calc(100dvh - 280px);
+
+  position: relative;
+
+  padding: 18px;
+
+  border-radius: 15px;
+
+  background:
+    repeating-linear-gradient(
+      0deg,
+      rgba(255, 255, 255, 0.025) 0px,
+      rgba(255, 255, 255, 0.025) 1px,
+      transparent 1px,
+      transparent 4px
+    ),
+    linear-gradient(
+      145deg,
+      #17181a,
+      #08090a
+    );
+
+  border: 2px solid #36383b;
+
+  box-shadow:
+    0 25px 50px rgba(0, 0, 0, 0.8),
+    inset 0 0 40px rgba(0, 0, 0, 0.7);
+
+  transform:
+    perspective(1200px)
+    rotateY(-2deg)
+    rotateZ(-1deg);
+
+  transition: transform 0.5s ease;
+}
+
+.old-cassette:hover {
+   transform:
+    perspective(1200px)
+    rotateY(0deg)
+    rotateZ(0deg)
+    translateY(-4px);
+}
+
+
+/* old scratches */
+
+.old-cassette::before {
+  content: "";
+
+  position: absolute;
+
+  inset: 8px;
+
+  border-radius: 10px;
+
+  pointer-events: none;
+
+  opacity: 0.35;
+
+  background:
+    repeating-linear-gradient(
+      172deg,
+      transparent 0px,
+      transparent 12px,
+      rgba(255, 255, 255, 0.06) 13px,
+      transparent 14px
+    );
+}
+
+
+/* screws */
+
+.screw {
+  position: absolute;
+
+  width: 24px;
+  height: 24px;
+
+  border-radius: 50%;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  color: #777;
+
+  font-size: 17px;
+
+  font-weight: bold;
+
+  background:
+    radial-gradient(
+      circle,
+      #343434,
+      #080808
+    );
+
+  border: 1px solid #676767;
+
+  box-shadow:
+    inset 0 1px 2px #999,
+    0 2px 4px #000;
+
+  z-index: 5;
+}
+
+.screw-1 {
+  left: 10px;
+  top: 10px;
+}
+
+.screw-2 {
+  right: 10px;
+  top: 10px;
+}
+
+.screw-3 {
+  left: 10px;
+  bottom: 10px;
+}
+
+.screw-4 {
+  right: 10px;
+  bottom: 10px;
+}
+
+
+/* =========================================
+   CASSETTE LABEL
+========================================= */
+
+.cassette-label {
+  height: 28%;
+
+  position: relative;
+
+  z-index: 2;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  padding: 0 30px;
+
+  background:
+    repeating-linear-gradient(
+      0deg,
+      transparent 0,
+      transparent 8px,
+      rgba(80, 55, 40, 0.1) 9px
+    ),
+    linear-gradient(
+      90deg,
+      #c7b39f,
+      #e3d0bb,
+      #c6b29e
+    );
+
+  border-radius: 8px 8px 0 0;
+
+  border: 1px solid #8e7a69;
+
+  box-shadow:
+    inset 0 0 20px rgba(60, 40, 20, 0.2);
+}
+
+.side-label {
+  width: 45px;
+  height: 45px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  background: #a82235;
+
+  color: #eee1d0;
+
+  font-family: Georgia, serif;
+
+  font-size: 30px;
+
+  border-radius: 4px;
+
+  box-shadow:
+    2px 2px 0 #55202a;
+}
+
+.handwritten {
+  font-family: "Comic Sans MS", cursive;
+
+  font-size: clamp(25px, 3vw, 43px);
+
+  font-weight: bold;
+
+  color: #17120f;
+
+  transform: rotate(-2deg);
+
+  text-shadow:
+    1px 1px 0 rgba(255, 255, 255, 0.3);
+}
+
+.heart {
+  color: #ae1f35;
+
+  font-size: 35px;
+
+  transform: rotate(-10deg);
+}
+
+
+/* =========================================
+   RED STRIPES
+========================================= */
+
+.red-stripes {
+  position: absolute;
+
+  left: 22px;
+  right: 22px;
+
+  top: 28%;
+
+  height: 18%;
+
+  background:
+    repeating-linear-gradient(
+      0deg,
+      #9c1d2c 0,
+      #9c1d2c 7px,
+      #6f1722 8px,
+      #b32336 11px
+    );
+
+  opacity: 0.9;
+}
+
+
+/* =========================================
+   TAPE WINDOW
+========================================= */
+
+.tape-window {
+  position: absolute;
+
+  left: 12%;
+  right: 12%;
+
+  top: 27%;
+
+  height: 31%;
+
+  z-index: 4;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  padding: 15px 25px;
+
+  background:
+    linear-gradient(
+      145deg,
+      #171a1d,
+      #070809
+    );
+
+  border: 2px solid #24282b;
+
+  border-radius: 12px;
+
+  box-shadow:
+    0 8px 15px #000,
+    inset 0 0 15px #000;
+}
+
+
+/* =========================================
+   CASSETTE TAPE REELS
+========================================= */
+
+.tape-reel {
+  width: clamp(82px, 8vw, 120px);
+  height: clamp(82px, 8vw, 120px);
+
+  position: relative;
+  z-index: 3; /* IMPORTANT */
+
+  flex-shrink: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 50%;
+
+  background:
+    radial-gradient(
+      circle,
+      #050607 0 31%,
+      #24272a 32% 45%,
+      #111315 46% 67%,
+      #050607 68% 100%
+    );
+
+  box-shadow:
+    inset 0 0 8px rgba(0, 0, 0, 0.95),
+    0 2px 5px rgba(0, 0, 0, 0.9);
+}
+
+
+/* =========================================
+   OLD METAL RING
+========================================= */
+
+.reel-metal-ring {
+  width: 82%;
+  height: 82%;
+
+  position: relative;
+
+  border-radius: 50%;
+
+  background:
+    radial-gradient(
+      circle,
+      #111 0 34%,
+      #7b6a56 35% 39%,
+      #c0a98a 40% 44%,
+      #5d5042 45% 49%,
+      #1b1b1a 50% 100%
+    );
+
+  box-shadow:
+    inset 0 0 7px #000,
+    0 0 2px rgba(225, 205, 170, 0.5);
+}
+
+
+/* =========================================
+   ROTATING SPOKES / TEETH
+========================================= */
+
+.reel-spokes {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  transform-origin: center;
+}
+
+.cassette-playing .reel-metal-ring {
+  animation: cassette-wheel-spin 1.2s linear infinite;
+  transform-origin: center center;
+}
+
+@keyframes cassette-wheel-spin {
+  from {
+    transform: rotate(0deg);
   }
 
-  &::before {
-    left: 0;
-    border-left-color: var(--border);
+  to {
+    transform: rotate(360deg);
   }
-  &::after {
-    right: 0;
-    border-right-color: var(--border);
+}
+
+
+
+/* =========================================
+   SIX OLD CASSETTE TEETH
+========================================= */
+
+.reel-spokes span {
+  position: absolute;
+
+  width: 18%;
+  height: 25%;
+
+  left: 41%;
+  top: 37.5%;
+
+  border-radius: 3px;
+
+  background:
+    linear-gradient(
+      90deg,
+      #786650,
+      #c2aa88,
+      #8d765b
+    );
+
+  box-shadow:
+    inset 0 1px rgba(255, 255, 255, 0.3),
+    0 1px 2px #000;
+}
+
+
+/* Six positions */
+
+.reel-spokes span:nth-child(1) {
+  transform: rotate(0deg) translateY(-37%);
+}
+
+.reel-spokes span:nth-child(2) {
+  transform: rotate(60deg) translateY(-37%);
+}
+
+.reel-spokes span:nth-child(3) {
+  transform: rotate(120deg) translateY(-37%);
+}
+
+.reel-spokes span:nth-child(4) {
+  transform: rotate(180deg) translateY(-37%);
+}
+
+.reel-spokes span:nth-child(5) {
+  transform: rotate(240deg) translateY(-37%);
+}
+
+.reel-spokes span:nth-child(6) {
+  transform: rotate(300deg) translateY(-37%);
+}
+
+
+/* =========================================
+   CENTER HUB
+========================================= */
+
+.reel-hub {
+  position: absolute;
+
+  left: 50%;
+  top: 50%;
+
+  width: 34%;
+  height: 34%;
+
+  transform: translate(-50%, -50%);
+
+  border-radius: 50%;
+
+  background:
+    radial-gradient(
+      circle at 35% 30%,
+      #303438,
+      #111315 55%,
+      #030405 100%
+    );
+
+  border: 3px solid #08090a;
+
+  box-shadow:
+    0 2px 5px #000,
+    inset 0 1px 2px rgba(255, 255, 255, 0.15);
+
+  z-index: 5;
+}
+
+
+.reel-hub-inner {
+  position: absolute;
+
+  left: 50%;
+  top: 50%;
+
+  width: 43%;
+  height: 43%;
+
+  transform: translate(-50%, -50%);
+
+  border-radius: 50%;
+
+  background:
+    radial-gradient(
+      circle at 35% 30%,
+      #303234,
+      #090a0b 65%
+    );
+
+  border: 2px solid #71614f;
+
+  box-shadow:
+    inset 0 0 5px #000;
+}
+
+
+/* =========================================
+   TAPE BETWEEN REELS
+========================================= */
+
+.cassette-tape {
+  position: absolute;
+
+  left: 20%;
+  right: 20%;
+
+  top: 24%;
+  bottom: 24%;
+
+  display: flex;
+  align-items: center;
+
+  overflow: hidden;
+
+  background:
+    linear-gradient(
+      90deg,
+      #3a2418 0%,
+      #17100d 12%,
+      #080707 30%,
+      #080707 70%,
+      #17100d 88%,
+      #3a2418 100%
+    );
+
+  border-radius: 5px;
+
+  box-shadow:
+    inset 0 0 15px #000;
+
+  z-index: 1;
+}
+
+
+/* tape rolls */
+
+.tape-roll-left,
+.tape-roll-right {
+  width: 28%;
+  height: 130%;
+
+  border-radius: 50%;
+
+  background:
+    repeating-linear-gradient(
+      90deg,
+      #130e0b 0px,
+      #130e0b 5px,
+      #2c1b14 6px,
+      #130e0b 10px
+    );
+
+  box-shadow:
+    inset 0 0 10px #000;
+}
+
+
+/* tape strip */
+
+.tape-strip {
+  height: 55%;
+
+  flex: 1;
+
+  display: flex;
+
+  justify-content: center;
+
+  align-items: center;
+
+  gap: 9px;
+
+  background: #0a0909;
+}
+
+.tape-strip span {
+  width: 2px;
+  height: 65%;
+
+  background:
+    linear-gradient(
+      #806d5c,
+      #342b24
+    );
+
+  opacity: 0.8;
+}
+
+
+
+/* =========================================
+   REEL ROTATION
+========================================= */
+
+/* =========================================
+   OLD METAL RING
+========================================= */
+
+.reel-metal-ring {
+  width: 82%;
+  height: 82%;
+  position: relative;
+  border-radius: 50%;
+
+  background:
+    radial-gradient(
+      circle,
+      #111 0 34%,
+      #7b6a56 35% 39%,
+      #c0a98a 40% 44%,
+      #5d5042 45% 49%,
+      #1b1b1a 50% 100%
+    );
+
+  box-shadow:
+    inset 0 0 7px #000,
+    0 0 2px rgba(225, 205, 170, 0.5);
+
+  /* IMPORTANT */
+  animation: none;
+  transform-origin: center center;
+}
+
+
+/* ONLY WHEN PLAYING */
+.cassette-playing .reel-metal-ring {
+  animation: cassette-wheel-spin 1.2s linear infinite;
+}
+
+
+@keyframes cassette-wheel-spin {
+  from {
+    transform: rotate(0deg);
   }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+/* =========================================
+   TAPE SCALE
+========================================= */
+
+.tape-scale {
+  position: absolute;
+
+  top: 57%;
+
+  left: 42%;
+
+  right: 42%;
+
+  z-index: 6;
+
+  display: flex;
+
+  justify-content: space-between;
+
+  color: #b9a18a;
+
+  font-family: monospace;
+
+  font-size: 9px;
+}
+
+
+/* =========================================
+   NUMBER
+========================================= */
+
+.cassette-number {
+  position: absolute;
+
+  right: 13%;
+
+  top: 42%;
+
+  z-index: 6;
+
+  color: #c42136;
+
+  font-family: Georgia, serif;
+
+  font-size: 50px;
+
+  font-weight: bold;
+}
+
+
+/* =========================================
+   BOTTOM CASSETTE
+========================================= */
+
+.cassette-bottom {
+  position: absolute;
+
+  left: 15%;
+  right: 15%;
+
+  bottom: 3%;
+
+  height: 17%;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-around;
+
+  background:
+    linear-gradient(
+      145deg,
+      #17191b,
+      #090a0b
+    );
+
+  border-top: 1px solid #56585b;
+
+  border-radius: 6px;
+
+  box-shadow:
+    inset 0 4px 10px #000;
+}
+
+.bottom-hole {
+  width: 38px;
+  height: 27px;
+
+  background: #220508;
+
+  border-radius: 40%;
+
+  border: 1px solid #3a1015;
+
+  box-shadow:
+    inset 0 2px 5px #000,
+    0 0 3px rgba(255, 0, 0, 0.2);
+
+  transition:
+    background 0.3s ease,
+    border-color 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+.cassette-playing .bottom-hole {
+  background: #063d1b;
+
+  border-color: #18b85a;
+
+  box-shadow:
+    inset 0 2px 5px #000,
+    0 0 5px rgba(20, 220, 90, 0.6),
+    0 0 12px rgba(20, 220, 90, 0.35);
+
+  animation: tape-led-green 1s ease-in-out infinite;
+}
+
+@keyframes tape-led-green {
+  0%,
+  100% {
+    background: #063d1b;
+
+    box-shadow:
+      inset 0 2px 5px #000,
+      0 0 4px rgba(20, 220, 90, 0.5);
+  }
+
+  50% {
+    background: #16a34a;
+
+    box-shadow:
+      inset 0 2px 5px #000,
+      0 0 8px #20e060,
+      0 0 18px rgba(20, 220, 90, 0.8);
+  }
+}
+
+.cassette-stopped .bottom-hole {
+  background: #4a080d;
+
+  border-color: #a51d2d;
+
+  box-shadow:
+    inset 0 2px 5px #000,
+    0 0 5px rgba(220, 30, 50, 0.45),
+    0 0 10px rgba(220, 30, 50, 0.2);
+
+  animation: tape-led-red 1.5s ease-in-out infinite;
+}
+
+@keyframes tape-led-red {
+  0%,
+  100% {
+    background: #4a080d;
+
+    box-shadow:
+      inset 0 2px 5px #000,
+      0 0 4px rgba(220, 30, 50, 0.4);
+  }
+
+  50% {
+    background: #d9233b;
+
+    box-shadow:
+      inset 0 2px 5px #000,
+      0 0 8px #ff3047,
+      0 0 16px rgba(220, 30, 50, 0.7);
+  }
+}
+
+
+/* =========================================
+   SONG
+========================================= */
+
+.song-section {
+  padding-right: 5%;
+
+  z-index: 4;
+}
+
+.now-playing {
+  color: #e42b42;
+
+  font-size: 12px;
+
+  letter-spacing: 4px;
+
+  margin-bottom: 16px;
+}
+
+.song-section h2 {
+  margin: 0;
+
+  font-family: Georgia, serif;
+
+  font-size: clamp(32px, 3vw, 50px);
+
+  line-height: 1.05;
+
+  color: #eadbc4;
+}
+
+.song-section p {
+  margin-top: 14px;
+
+  color: #aaa4a0;
+
+  font-size: 15px;
+}
+
+
+/* =========================================
+   VISUALIZER
+========================================= */
+
+.visualizer {
+  height: 40px;
+
+  margin-top: 20px;
+
+  display: flex;
+
+  align-items: end;
+
+  gap: 4px;
+}
+
+.visualizer span {
+  width: 3px;
+
+  background: #d72c40;
+
+  opacity: 0.8;
+
+  animation:
+    visualizer-animation 0.7s ease-in-out infinite alternate;
+}
+
+@keyframes visualizer-animation {
+  from {
+    transform: scaleY(0.4);
+  }
+
+  to {
+    transform: scaleY(1);
+  }
+}
+
+
+/* =========================================
+   PROGRESS
+========================================= */
+
+.progress {
+  margin-top: 22px;
+}
+
+.progress-track {
+  height: 4px;
+  position: relative;
+  background: #282933;
+  border-radius: 5px;
+  overflow: visible;
+}
+
+.progress-value {
+  height: 100%;
+  background: #df2d42;
+  transition: width 0.3s linear;
+}
+
+.progress-dot {
+  position: absolute;
+
+  top: 50%;
+
+  width: 14px;
+  height: 14px;
+
+  transform: translate(-50%, -50%);
+
+  border-radius: 50%;
+
+  background: #df2d42;
+
+  box-shadow:
+    0 0 10px rgba(223, 45, 66, 0.7);
+
+  transition: left 0.3s linear;
+}
+
+.progress-time {
+  display: flex;
+
+  justify-content: space-between;
+
+  margin-top: 9px;
+
+  color: #a19a92;
+
+  font-family: monospace;
+
+  font-size: 11px;
+}
+
+
+/* =========================================
+   PLAYER PANEL
+========================================= */
+
+/* =========================================
+   PLAYER PANEL
+========================================= */
+
+.player-panel {
+  width: 92%;
+  height: 130px;
+  min-height: 130px;
+
+  /* Move the whole console slightly ABOVE the footer */
+  margin: 0 auto 25px;
+
+  padding: 14px 28px;
+
+  position: relative;
+  z-index: 5;
+
+  display: grid;
+
+  grid-template-columns:
+    130px
+    minmax(500px, 1fr)
+    130px;
+
+  align-items: center;
+
+  gap: 25px;
+
+  border: 1px solid #292b31;
+  border-radius: 14px;
+
+  background:
+    repeating-linear-gradient(
+      0deg,
+      rgba(255, 255, 255, 0.02) 0px,
+      rgba(255, 255, 255, 0.02) 1px,
+      transparent 1px,
+      transparent 4px
+    ),
+    linear-gradient(
+      145deg,
+      #11151b 0%,
+      #090c11 50%,
+      #07090d 100%
+    );
+
+  box-shadow:
+    0 12px 30px rgba(0, 0, 0, 0.65),
+    inset 0 1px rgba(255, 255, 255, 0.07),
+    inset 0 -8px 15px rgba(0, 0, 0, 0.25);
+}
+
+
+/* =========================================
+   KNOBS
+========================================= */
+
+/* =========================================
+   KNOB SECTIONS
+========================================= */
+
+.knob-section {
+  height: 100%;
+
+  display: flex;
+  flex-direction: column;
+
+  align-items: center;
+  justify-content: center;
+
+  text-align: center;
+
+  position: relative;
+}
+
+.knob-section label {
+  display: block;
+
+  margin-bottom: 7px;
+
+  color: #cbbca7;
+
+  font-family: Arial, sans-serif;
+
+  font-size: 11px;
+  font-weight: 500;
+
+  letter-spacing: 2px;
+
+  text-shadow:
+    0 2px 3px #000;
+}
+
+
+
+.knob::before {
+  content: "";
+
+  position: absolute;
+
+  inset: -8px;
+
+  border-radius: 50%;
+
+  border: 2px dotted #b7a493;
+
+  opacity: 0.9;
+}
+
+.knob-indicator {
+  width: 3px;
+  height: 27px;
+
+  position: absolute;
+
+  left: 50%;
+  top: 50%;
+
+  transform-origin: 50% 100%;
+
+  background: #ff3047;
+
+  box-shadow:
+    0 0 6px #ff3047,
+    0 0 12px rgba(255, 48, 71, 0.5);
+
+  border-radius: 2px;
+
+  pointer-events: none;
+
+  transition: transform 0.08s linear;
+}
+
+.knob-values {
+  width: 72px;
+
+  display: flex;
+  justify-content: space-between;
+
+  margin-top: 5px;
+
+  color: #b8aa99;
+
+  font-family: monospace;
+  font-size: 11px;
+}
+
+.volume-button {
+  border: none;
+  background: transparent;
+  color: #b8aa99;
+
+  font-family: monospace;
+  font-size: 18px;
+  font-weight: bold;
+
+  cursor: pointer;
+
+  padding: 2px 8px;
+
+  transition:
+    color 0.15s ease,
+    transform 0.15s ease;
+}
+
+.volume-button:hover {
+  color: #df2d42;
+  transform: scale(1.2);
+}
+
+.volume-button:active {
+  transform: scale(0.95);
+}
+
+.volume-value {
+  min-width: 30px;
+  text-align: center;
+  color: #d9c7ae;
+  font-family: monospace;
+  font-size: 11px;
+}
+
+
+/* =========================================
+   CONTROLS
+========================================= */
+
+.controls {
+  height: 100%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  gap: 14px;
+
+  position: relative;
+}
+
+
+/* Physical button */
+
+.retro-control {
+  position: relative;
+
+  width: 82px;
+  height: 70px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  color: #d8c5b5;
+
+  border: 1px solid #08090c;
+  border-radius: 7px;
+
+  background:
+    linear-gradient(
+      145deg,
+      #252832 0%,
+      #11141a 45%,
+      #090b10 100%
+    );
+
+  box-shadow:
+    0 5px 0 #050609,
+    0 8px 12px rgba(0, 0, 0, 0.7),
+    inset 0 1px 1px rgba(255,255,255,0.12),
+    inset 0 -2px 5px rgba(0,0,0,0.8);
+
+  cursor: pointer;
+
+  transition:
+    transform 0.12s ease,
+    box-shadow 0.12s ease;
+}
+
+
+/* metallic inner border */
+
+.retro-control::before {
+  content: "";
+
+  position: absolute;
+
+  inset: 5px;
+
+  border: 1px solid rgba(183, 157, 143, 0.22);
+
+  border-radius: 4px;
+
+  pointer-events: none;
+}
+
+
+/* icon */
+
+.retro-control svg {
+  width: 30px;
+  height: 30px;
+
+  stroke-width: 1.8;
+
+  filter:
+    drop-shadow(0 2px 2px #000);
+}
+
+
+/* label above button */
+
+.control-label {
+  position: absolute;
+
+  top: -22px;
+  left: 50%;
+
+  transform: translateX(-50%);
+
+  white-space: nowrap;
+
+  color: #d7c8b8;
+
+  font-family: Georgia, "Times New Roman", serif;
+
+  font-size: 11px;
+  font-weight: bold;
+
+  letter-spacing: 0.5px;
+
+  text-shadow:
+    0 2px 4px #000;
+}
+
+
+/* physical press */
+
+.retro-control:active {
+  transform: translateY(4px);
+
+  box-shadow:
+    0 2px 0 #050609,
+    0 4px 7px rgba(0, 0, 0, 0.7),
+    inset 0 2px 6px rgba(0,0,0,0.7);
+}
+
+
+/* hover */
+
+.retro-control:hover {
+  border-color: #6c2935;
+
+  color: #ead7c6;
+}
+
+
+/* =========================================
+   PLAY BUTTON
+========================================= */
+
+.retro-control.play-control {
+  width: 88px;
+  height: 76px;
+
+  color: #f5e4d3;
+
+  border-color: #641722;
+
+  background:
+    radial-gradient(
+      circle at 50% 45%,
+      #d72d42 0%,
+      #941a2b 35%,
+      #4a101b 70%,
+      #16090d 100%
+    );
+
+  box-shadow:
+    0 6px 0 #22070c,
+    0 10px 20px rgba(0,0,0,0.8),
+    0 0 18px rgba(220, 38, 59, 0.45),
+    inset 0 1px 2px rgba(255,255,255,0.25),
+    inset 0 -8px 15px rgba(0,0,0,0.35);
+}
+
+
+/* active red illumination */
+
+.retro-control.play-control.active {
+  color: #fff1e5;
+
+  background:
+    radial-gradient(
+      circle at 50% 40%,
+      #ff4055 0%,
+      #d52238 30%,
+      #841525 65%,
+      #280b11 100%
+    );
+
+  box-shadow:
+    0 6px 0 #21060a,
+    0 10px 25px rgba(0,0,0,0.8),
+    0 0 30px rgba(235, 38, 60, 0.75),
+    inset 0 1px 3px rgba(255,255,255,0.3);
+}
+
+
+/* play triangle */
+
+.retro-control.play-control svg {
+  width: 34px;
+  height: 34px;
+  fill: currentColor;
+}
+
+
+
+
+/* =========================================
+   COUNTER
+========================================= */
+
+.counter {
+  padding: 10px;
+
+  text-align: center;
+
+  font-family: monospace;
+
+  font-size: 28px;
+
+  letter-spacing: 7px;
+
+  color: #d9c7ae;
+
+  background: #030406;
+
+  border: 1px solid #34363a;
+
+  box-shadow:
+    inset 0 0 10px #000;
+}
+
+
+/* =========================================
+   FOOTER
+========================================= */
+
+.footer {
+  width: 92%;
+
+  height: 52px;
+  min-height: 52px;
+
+  margin: 0 auto 8px;
+
+  padding: 0 25px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  gap: 25px;
+
+  border: 1px solid #262832;
+
+  border-radius: 30px;
+
+  color: #c9b7a1;
+}
+
+.footer-text {
+  color: #d83247;
+
+  font-family: Georgia, serif;
+
+  font-size: 18px;
+}
+
+.footer-cassette {
+  color: #d83247;
+
+  font-size: 24px;
+}
+
+.footer-equalizer {
+  display: flex;
+
+  align-items: end;
+
+  gap: 3px;
+
+  height: 30px;
+}
+
+.footer-equalizer span {
+  width: 3px;
+
+  background: #d62c41;
+}
+
+
+/* =========================================
+   RESPONSIVE
+========================================= */
+
+@media (max-width: 1100px) {
+
+  .main-content {
+    grid-template-columns: 0.7fr 1.4fr 0.7fr;
+  }
+
+  .branding h1 {
+    font-size: 55px;
+  }
+
+  .old-cassette {
+    width: 48vw;
+  }
+
+
+  .player-panel {
+  width: 92%;
+
+  height: 125px;
+  min-height: 125px;
+
+  margin: 0 auto 10px;
+
+  padding: 18px 30px;
+
+  position: relative;
+  z-index: 5;
+
+  display: grid;
+
+  grid-template-columns:
+    120px
+    minmax(420px, 1fr)
+    150px
+    100px
+    100px;
+
+  align-items: center;
+
+  gap: 24px;
+
+  border: 1px solid #292b31;
+  border-radius: 10px;
+
+  background:
+    repeating-linear-gradient(
+      0deg,
+      rgba(255,255,255,0.025) 0px,
+      rgba(255,255,255,0.025) 1px,
+      transparent 1px,
+      transparent 4px
+    ),
+    linear-gradient(
+      145deg,
+      #171a21,
+      #080a0e
+    );
+
+  box-shadow:
+    0 12px 30px rgba(0,0,0,0.7),
+    inset 0 1px rgba(255,255,255,0.08);
+}
+
+  .round-control {
+    width: 52px;
+    height: 52px;
+  }
+
+  .play-control {
+    width: 65px;
+    height: 65px;
+  }
+}
+
+
+/* =========================================
+   TABLET / MOBILE
+========================================= */
+
+@media (max-width: 800px) {
+
+  .retro-app {
+    overflow-y: auto;
+  }
+
+  .top-bar {
+    padding: 0 20px;
+  }
+
+  .playlist-status {
+    display: none;
+  }
+
+  .main-content {
+    min-height: auto;
+
+    grid-template-columns: 1fr;
+
+    padding: 30px 20px 30px;
+
+    text-align: center;
+  }
+
+  .branding {
+    padding: 0;
+
+    order: 1;
+  }
+
+  .cassette-area {
+    order: 2;
+  }
+
+  .song-section {
+    order: 3;
+
+    padding: 0;
+  }
+
+  .est {
+    justify-content: center;
+  }
+
+  .branding h1 {
+    font-size: 58px;
+  }
+
+  .mini-cassette-icon {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .old-cassette {
+    width: min(620px, 92vw);
+  }
+
+  .player-panel {
+    width: 92%;
+
+    grid-template-columns: 1fr;
+
+    padding: 25px;
+
+    gap: 30px;
+  }
+
+  .controls {
+    order: 1;
+  }
+
+  .knob-section {
+    display: none;
+  }
+
+  .counter-section {
+    order: 2;
+
+    max-width: 180px;
+
+    margin: auto;
+  }
+
+  .footer {
+    margin-top: 20px;
+  }
+}
+
+
+/* =========================================
+   SMALL MOBILE
+========================================= */
+
+@media (max-width: 500px) {
+
+  .branding h1 {
+    font-size: 46px;
+  }
+
+  .old-cassette {
+    width: 94vw;
+
+    padding: 12px;
+  }
+
+  .cassette-label {
+    padding: 0 12px;
+  }
+
+  .handwritten {
+    font-size: 20px;
+  }
+
+  .side-label {
+    width: 32px;
+    height: 32px;
+
+    font-size: 20px;
+  }
+
+  .heart {
+    font-size: 20px;
+  }
+
+  .tape-window {
+    padding: 8px;
+  }
+
+  .cassette-number {
+    font-size: 30px;
+  }
+
+  .footer {
+    display: none;
+  }
+}
+
+@media (min-width: 801px) {
+  html,
+  body,
+  #root {
+    overflow: hidden;
+  }
+
+  .retro-app {
+    overflow: hidden;
+  }
+}
+
+@media (min-width: 801px) and (max-height: 800px) {
+
+  .top-bar {
+    height: 55px;
+    min-height: 55px;
+  }
+
+  .main-content {
+    padding-top: 5px;
+    padding-bottom: 5px;
+  }
+
+  .branding h1 {
+    font-size: 48px;
+  }
+
+  .mini-cassette-icon {
+    margin-top: 20px;
+  }
+
+  .brand-tagline {
+    margin-top: 12px;
+  }
+
+  .old-cassette {
+    max-height: calc(100dvh - 230px);
+  }
+
+  .player-panel {
+    height: 95px;
+    min-height: 95px;
+  }
+
+ .knob {
+  width: 72px;
+  height: 72px;
+
+  position: relative;
+
+  border-radius: 50%;
+
+  background:
+    radial-gradient(
+      circle at 35% 28%,
+      #41464e 0%,
+      #20242b 30%,
+      #101319 58%,
+      #050608 100%
+    );
+
+  border: 2px solid #4b5057;
+
+  box-shadow:
+    0 6px 12px rgba(0, 0, 0, 0.9),
+    inset 0 2px 3px rgba(255, 255, 255, 0.15),
+    inset 0 -7px 10px rgba(0, 0, 0, 0.8);
+
+  flex-shrink: 0;
+
+  /* Move both knobs upward */
+  transform: translateY(-30px);
+}
+
+  .round-control {
+    width: 44px;
+    height: 44px;
+  }
+
+  .play-control {
+    width: 56px;
+    height: 56px;
+  }
+
+  .counter {
+    padding: 6px;
+
+    font-size: 22px;
+  }
+
+  .footer {
+    height: 42px;
+    min-height: 42px;
+
+    margin-bottom: 5px;
+  }
+
+  .footer-text {
+    font-size: 15px;
+  }
+}
+
+/* =========================================
+   PLAYER - FINAL ALIGNMENT
+========================================= */
+
+@media (min-width: 801px) {
+
+  /* Keep the console in its current position */
+  .player-panel {
+    position: relative;
+    align-items: center;
+  }
+
+  /* -----------------------------
+     VOLUME / BALANCE
+  ----------------------------- */
+
+  .knob-section {
+    position: relative;
+
+    /* move entire knob group upward */
+    transform: translateY(-30px);
+
+    justify-content: flex-start;
+  }
+
+  .knob-section label {
+    margin-bottom: 7px;
+  }
+
+  .knob {
+    transform: none;
+  }
+
+  .knob-values {
+    margin-top: 5px;
+  }
+
+  /* -----------------------------
+     CONTROL BUTTONS
+  ----------------------------- */
+
+  .controls {
+    align-items: center;
+
+    /* move all buttons upward */
+    transform: translateY(-35px);
+  }
+
+  /* labels stay attached to buttons */
+  .control-label {
+    top: -22px;
+  }
+}
+
+/* =========================================
+   YOUTUBE PLAYER
+========================================= */
+
+.youtube-player-wrapper {
+  position: fixed;
+
+  width: 1px;
+  height: 1px;
+
+  left: -100px;
+  top: -100px;
+
+  overflow: hidden;
+
+  opacity: 0;
+
+  pointer-events: none;
+
+  z-index: -1;
+}
+
+.youtube-player-wrapper iframe {
+  width: 1px !important;
+  height: 1px !important;
+
+  border: 0 !important;
+}
+
+.progress-track {
+  cursor: pointer;
+}
+
+.progress-dot {
+  cursor: pointer;
+  z-index: 10;
 }
