@@ -29,6 +29,7 @@ function App() {
   // ==========================================================
 
   const [isPlaying, setIsPlaying] = useState(false);
+  const [isCassetteLoading, setIsCassetteLoading] = useState(false);
 
   const [currentSong, setCurrentSong] = useState({
     title: "Good Times",
@@ -419,6 +420,8 @@ useEffect(() => {
 
   };
 
+  
+
 
   // ==========================================================
   // GET CURRENT YOUTUBE SONG
@@ -531,31 +534,30 @@ useEffect(() => {
   // ==========================================================
 
   const togglePlayPause = () => {
+  if (!playerRef.current) {
+    console.log("YouTube player is not ready yet");
+    return;
+  }
 
-    if (!playerRef.current) {
+  // PAUSE
+  if (isPlaying) {
+    playerRef.current.pauseVideo();
+    return;
+  }
 
-      console.log(
-        "YouTube player is not ready yet"
-      );
+  // PLAY
+  // First show cassette loading/insertion animation
+  setIsCassetteLoading(true);
 
-      return;
-    }
-
-    if (isPlaying) {
-
-      // PAUSE
-      playerRef.current.pauseVideo();
-
-    }
-
-    else {
-
-      // PLAY
+  // Give the animation time to complete
+  setTimeout(() => {
+    if (playerRef.current) {
       playerRef.current.playVideo();
-
     }
 
-  };
+    setIsCassetteLoading(false);
+  }, 800);
+};
 
 
   // ==========================================================
@@ -724,8 +726,9 @@ useEffect(() => {
         <div className="playlist-status">
 
           <span className="live-dot" />
+          <span className="live-count">7 listeners</span>
 
-          Good Times Playlist से
+          RETRO CASSETTE Playlist से
 
         </div>
 
@@ -783,13 +786,11 @@ useEffect(() => {
         <section className="cassette-area">
 
           <div
-            className={
-              `old-cassette ${
-                isPlaying
-                  ? "cassette-playing"
-                  : ""
-              }`
-            }
+            className={`
+            old-cassette
+            ${isPlaying ? "cassette-playing" : ""}
+            ${isCassetteLoading ? "cassette-loading" : ""}
+          `}
           >
 
 

@@ -134,19 +134,6 @@ body {
   color: #c8c0b4;
 }
 
-.live-dot {
-  width: 13px;
-  height: 13px;
-
-  border-radius: 50%;
-
-  background: #ed3147;
-
-  box-shadow:
-    0 0 10px #ed3147,
-    0 0 25px rgba(237, 49, 71, 0.5);
-}
-
 .more-button {
   width: 48px;
   height: 48px;
@@ -636,6 +623,130 @@ body {
   box-shadow:
     0 8px 15px #000,
     inset 0 0 15px #000;
+}
+
+/* =========================================
+   CASSETTE INSERT / LOADING ANIMATION
+========================================= */
+
+.tape-window {
+  transform-origin: center center;
+
+  transition:
+    transform 0.35s ease,
+    box-shadow 0.35s ease;
+}
+
+
+/* When PLAY is clicked:
+   cassette mechanism slightly opens
+*/
+
+/* =========================================
+   CASSETTE INSERT / OPEN ANIMATION
+========================================= */
+
+.tape-window {
+  transform-origin: center center;
+}
+
+
+/* Opening / inserting */
+
+.cassette-loading .tape-window {
+  animation: cassette-insert 0.8s ease-in-out;
+}
+
+
+@keyframes cassette-insert {
+
+  /* CLOSED */
+  0% {
+    transform: translateY(0);
+  }
+
+  /* OPEN - move mechanism DOWN */
+  25% {
+    transform: translateY(18px);
+  }
+
+  /* OPEN POSITION */
+  45% {
+    transform: translateY(24px);
+  }
+
+  /* CASSETTE GOES IN */
+  65% {
+    transform: translateY(12px);
+  }
+
+  /* LOCK */
+  82% {
+    transform: translateY(-3px);
+  }
+
+  /* FINAL POSITION */
+  100% {
+    transform: translateY(0);
+  }
+}
+
+.cassette-loading .tape-reel {
+  animation: reel-insert 0.8s ease-in-out;
+}
+
+@keyframes reel-insert {
+
+  0% {
+    transform: translateY(0);
+  }
+
+  25% {
+    transform: translateY(18px);
+  }
+
+  45% {
+    transform: translateY(24px);
+  }
+
+  65% {
+    transform: translateY(12px);
+  }
+
+  82% {
+    transform: translateY(-3px);
+  }
+
+  100% {
+    transform: translateY(0);
+  }
+}
+
+.cassette-loading .cassette-label {
+  animation: cassette-label-open 0.8s ease-in-out;
+}
+
+@keyframes cassette-label-open {
+
+  0% {
+    transform: translateY(0);
+  }
+
+  30% {
+    transform: translateY(-12px);
+  }
+
+  50% {
+    transform: translateY(-18px);
+  }
+
+  70% {
+    transform: translateY(-8px);
+  }
+
+  100% {
+    transform: translateY(0);
+  }
 }
 
 
@@ -2207,3 +2318,44 @@ body {
 
   cursor: default;
 }
+
+.playlist-status {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.live-count {
+  color: #c8c0b4;
+  font-family: monospace;
+  font-size: 13px;
+  letter-spacing: 1px;
+}
+
+.live-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  border-radius: 50%;
+
+  background: #31ed70;
+
+  box-shadow:
+    0 0 10px #50de71,
+    0 0 25px rgba(39, 222, 121, 0.5);
+
+  animation: live-pulse 1.5s infinite;
+}
+
+@keyframes live-pulse {
+  0%, 100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  50% {
+    opacity: 0.5;
+    transform: scale(1.15);
+  }
+}
+
