@@ -1,6 +1,10 @@
 import { useRef, useState, useEffect } from "react";
 import YouTube from "react-youtube";
 import { Radio } from "lucide-react";
+import blueCassette from "./assets/bluecassttee.png";
+import creamCassette from "./assets/cream.PNG";
+import heroCassette from "./assets/vintage.png";
+import ogCassette from "./assets/og.png";
 
 import {
   MoreHorizontal,
@@ -9,6 +13,10 @@ import {
   Play,
   Pause,
   Square,
+  Bus,
+  Scissors,
+  Moon,
+  Music2,
 } from "lucide-react";
 
 import "./App.css";
@@ -18,8 +26,10 @@ import "./App.css";
 // YOUTUBE PLAYLIST ID
 // ============================================================
 
-const YOUTUBE_PLAYLIST_ID =
-  "PLeatb7hupNV_AWUl_7ttbsKeCQh8tF5N4";
+const PLAYLISTS = {
+  busDriver: "PL3JSEdjy0dsJJzd2tmKShEh57MHE85DaO",
+  nightRide: "PLeatb7hupNV_AWUl_7ttbsKeCQh8tF5N4",
+};
 
 
 function App() {
@@ -30,6 +40,9 @@ function App() {
 
   const [isPlaying, setIsPlaying] = useState(false);
   const [isCassetteLoading, setIsCassetteLoading] = useState(false);
+  const [currentPlaylist, setCurrentPlaylist] = useState(
+   PLAYLISTS.nightRide
+);
 
   const [currentSong, setCurrentSong] = useState({
     title: "Good Times",
@@ -396,29 +409,20 @@ useEffect(() => {
   // YOUTUBE PLAYER READY
   // ==========================================================
 
-  const onPlayerReady = (event) => {
+ const onPlayerReady = (event) => {
+  playerRef.current = event.target;
 
-    playerRef.current = event.target;
+  console.log("YouTube player ready");
 
-    console.log("YouTube player ready");
+  event.target.setVolume(volume);
 
-    // Initial volume
-    event.target.setVolume(volume);
-
-    /*
-     * Load your playlist.
-     *
-     * We don't autoplay here.
-     * User needs to click Play.
-     */
-
-    event.target.loadPlaylist({
-      list: YOUTUBE_PLAYLIST_ID,
-      listType: "playlist",
-      index: 0,
-    });
-
-  };
+  // Default playlist = रात की सवारी
+  event.target.loadPlaylist({
+    list: PLAYLISTS.nightRide,
+    listType: "playlist",
+    index: 0,
+  });
+};
 
   
 
@@ -532,6 +536,44 @@ useEffect(() => {
   // ==========================================================
   // PLAY / PAUSE
   // ==========================================================
+const selectPlaylist = (playlistId) => {
+  if (!playerRef.current) {
+    console.log("YouTube player is not ready yet");
+    return;
+  }
+
+  // Don't do anything if same playlist is already selected
+  if (currentPlaylist === playlistId && isPlaying) {
+    return;
+  }
+
+  setCurrentPlaylist(playlistId);
+  setCurrentTime(0);
+  setDuration(0);
+  setIsCassetteLoading(true);
+
+  // Load selected playlist
+  playerRef.current.loadPlaylist({
+    list: playlistId,
+    listType: "playlist",
+    index: 0,
+  });
+
+  // Start playing after cassette animation
+  setTimeout(() => {
+    if (playerRef.current) {
+      playerRef.current.playVideo();
+    }
+
+    setIsCassetteLoading(false);
+
+    // Update song information after YouTube loads it
+    setTimeout(() => {
+      updateCurrentSong();
+      updateProgress();
+    }, 700);
+  }, 800);
+};
 
   const togglePlayPause = () => {
   if (!playerRef.current) {
@@ -645,36 +687,19 @@ useEffect(() => {
   // ==========================================================
 
   const youtubeOptions = {
+  width: "480",
+  height: "270",
 
-    width: "480",
-
-    height: "270",
-
-    playerVars: {
-
-      // Don't autoplay
-      autoplay: 0,
-
-      // Show YouTube controls while testing
-      controls: 1,
-
-      // Mobile inline playback
-      playsinline: 1,
-
-      // Don't show unrelated videos
-      rel: 0,
-
-      // Playlist
-      listType: "playlist",
-
-      list: YOUTUBE_PLAYLIST_ID,
-
-      // Loop playlist
-      loop: 1,
-
-    },
-
-  };
+  playerVars: {
+    autoplay: 0,
+    controls: 1,
+    playsinline: 1,
+    rel: 0,
+    listType: "playlist",
+    list: PLAYLISTS.nightRide,
+    loop: 1,
+  },
+};
 
 
   // ==========================================================
@@ -745,8 +770,85 @@ useEffect(() => {
       {/* ======================================================
           MAIN
       ====================================================== */}
-
+      
       <main className="main-content">
+
+            {/* ====================================================
+          PLAYLIST CASSETTES
+      ==================================================== */}
+
+        <div className="playlist-cassettes">
+
+          {/* 🩷 BUS DRIVER */}
+          <button
+              className="playlist-cassette playlist-blue"
+              onClick={() => selectPlaylist(PLAYLISTS.busDriver)}
+            >
+            <div className="playlist-cassette-header">
+              <div className="playlist-icon bus-icon">
+                <Bus size={15} strokeWidth={2.2} />
+              </div>
+
+              <div className="playlist-header-text">
+                <span className="playlist-title">बस ड्राइवर</span>
+              </div>
+            </div>
+
+            <img src={blueCassette} alt="बस ड्राइवर" />
+          </button>
+
+
+          {/* 🟡 DELUXE SALON */}
+          <button className="playlist-cassette playlist-cream">
+            <div className="playlist-cassette-header">
+              <div className="playlist-icon salon-icon">
+                <Scissors size={15} strokeWidth={2.2} />
+              </div>
+
+              <div className="playlist-header-text">
+                <span className="playlist-title">डीलक्स सैलून</span>
+              </div>
+            </div>
+
+            <img src={creamCassette} alt="डीलक्स सैलून" />
+          </button>
+
+
+          {/* 🩶 RAAT KI SAWARI */}
+          <button
+              className="playlist-cassette playlist-hero"
+              onClick={() => selectPlaylist(PLAYLISTS.nightRide)}
+            >
+            <div className="playlist-cassette-header">
+              <div className="playlist-icon night-icon">
+                <Moon size={15} strokeWidth={2.2} />
+              </div>
+
+              <div className="playlist-header-text">
+                <span className="playlist-title">रात की सवारी</span>
+              </div>
+            </div>
+
+            <img src={heroCassette} alt="रात की सवारी" />
+          </button>
+
+
+          {/* 🩷 NAYA ZAMANA */}
+          <button className="playlist-cassette playlist-og">
+            <div className="playlist-cassette-header">
+              <div className="playlist-icon new-icon">
+                <Music2 size={15} strokeWidth={2.2} />
+              </div>
+
+              <div className="playlist-header-text">
+                <span className="playlist-title">नया ज़माना</span>
+              </div>
+            </div>
+
+            <img src={ogCassette} alt="नया ज़माना" />
+          </button>
+
+</div>
 
 
         {/* ====================================================
@@ -1103,6 +1205,7 @@ useEffect(() => {
         </section>
 
       </main>
+      
 
 
       {/* ======================================================
